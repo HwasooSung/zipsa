@@ -34,7 +34,9 @@ public class CurrentMapActivity extends AppCompatActivity {
         //map setting
         naverMapFragment = new NaverMapFragment();
         naverMapFragment.setArguments(new Bundle());
+
         fragmentManager = getSupportFragmentManager();
+
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.naver_map_fragment_here, naverMapFragment);
         fragmentTransaction.commit();

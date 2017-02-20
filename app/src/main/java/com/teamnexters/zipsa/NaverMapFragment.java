@@ -35,6 +35,7 @@ public class NaverMapFragment extends Fragment {
     private Location currentPoint;
 
     //    private OnFragmentInteractionListener mListener;
+
     public NaverMapFragment() {
         // Required empty public constructor
     }
@@ -47,9 +48,7 @@ public class NaverMapFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_naver_map, container, false);
     }
 
@@ -117,20 +116,9 @@ public class NaverMapFragment extends Fragment {
         mMapContext.setupMapView(mapView);
         nMapController = mapView.getMapController();
 
-//        if(currentPoint !=  null ) {
-//            Log.d("HIHIHIHI", "in");
-//            NGeoPoint currentNGeoPoint = new NGeoPoint(currentPoint.getLongitude(), currentPoint.getLatitude());
-//            nMapController.animateTo(currentNGeoPoint);
-//        }
-//        else {
-//
-//        }
-
         mapView.setScalingFactor(2.0f, false);
 
-
     }
-
 
     @Override
     public void onActivityCreated(Bundle saveInstanceState) {
