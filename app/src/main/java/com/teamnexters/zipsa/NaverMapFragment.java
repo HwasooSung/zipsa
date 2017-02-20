@@ -53,27 +53,23 @@ public class NaverMapFragment extends Fragment {
     }
 
     private void initMapView() {
+        // 퍼미션 등록
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE}, ConstantsCommon.TAG_CODE_PERMISSION_LOCATION);
-
         } else {
         }
 
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
-
             @Override
             public void onLocationChanged(Location location) {
-                Log.d("HI", location.getLatitude() + ", " + location.getLongitude());
                 currentPoint = location;
-                Log.d("HIHIHIHI", "in");
                 NGeoPoint currentNGeoPoint = new NGeoPoint(currentPoint.getLongitude(), currentPoint.getLatitude());
                 nMapController.animateTo(currentNGeoPoint);
-
             }
 
             @Override
@@ -117,7 +113,6 @@ public class NaverMapFragment extends Fragment {
         nMapController = mapView.getMapController();
 
         mapView.setScalingFactor(2.0f, false);
-
     }
 
     @Override
