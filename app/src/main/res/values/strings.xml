@@ -1,0 +1,20 @@
+<resources>
+    <string name="str_done">완료</string>
+    <string name="app_name">Zipsa</string>
+    <string name="setting">설정</string>
+    <string name="store">저장</string>
+    <string name="complete">확인</string>
+    <string name="add_option">옵션 추가</string>
+    <string name="modify_option">옵션 수정</string>
+    <string name="building_info">건물 정보</string>
+    <string name="price_info">가격 정보</string>
+    <string name="furniture_option">가전/가구 옵션</string>
+    <string name="room_info">방 정보</string>
+    <string name="bathroom">화장실</string>
+    <string name="user_add_option">사용자 추가 옵션</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

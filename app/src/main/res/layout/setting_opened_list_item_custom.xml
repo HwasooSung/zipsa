@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/detailed_option_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- 더 생각해봐야할듯 어떻게 할지-->
+    <!-- java 코드에서 동적으로 처리해줘야하겠지 -->
+    <!-- 그걸 정적이라고 말해도 되나-->
+    <!-- 1 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <!--&lt;!&ndash; 2 &ndash;&gt;-->
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"/>-->
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"/>-->
+    <!--&lt;!&ndash; 3 &ndash;&gt;-->
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"/>-->
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"/>-->
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:visibility="gone"/>-->
+    <!--&lt;!&ndash; &ndash;&gt;-->
+
+    <Button
+        android:id="@+id/setting_opened_list_check_button"
+        android:background="@drawable/uncheck"
+        android:layout_width="24.7dp"
+        android:layout_height="24.7dp" />
+</LinearLayout>

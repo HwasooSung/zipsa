@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/color_background">
+    <TextView
+        android:id="@+id/detailed_option_name"
+        android:text="건물 층 수"
+        android:textColor="@color/less_cloudy_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13.3dp"
+        android:layout_marginTop="27.3dp"
+        android:textSize="15sp"/>
+
+    <!-- 1 텍스트 입력-->
+    <!--<EditText-->
+        <!--android:id="@+id/setting_activity_child_edit_text"-->
+        <!--&lt;!&ndash;android:hint="층 수를 입력해주세요"&ndash;&gt;-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginRight="36.7dp"-->
+        <!--android:textColorHint="#6699aeba"-->
+        <!--android:layout_marginTop="27.7dp"-->
+        <!--android:textSize="15sp"-->
+        <!--android:background="@null"/>-->
+
+    <!-- 2 버튼 두 개-->
+    <!--<RelativeLayout-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginTop="14.7dp"-->
+        <!--android:layout_marginRight="35.7dp"-->
+        <!--android:background="@drawable/twobtn"-->
+        <!--android:layout_width="223dp"-->
+        <!--android:layout_height="43.7dp">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="13sp"-->
+            <!--android:text="있음"-->
+            <!--android:textColor="@color/color_main"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="153.3dp"-->
+            <!--android:layout_marginTop="15dp"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="13sp"-->
+            <!--android:text="없음"-->
+            <!--android:textColor="@color/less_cloudy_blue"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="44.7dp"-->
+            <!--android:layout_marginTop="14.7dp"/>-->
+    <!--</RelativeLayout>-->
+
+    <!-- 3 버튼 세 개 -->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="223dp"-->
+        <!--android:layout_height="43.7dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginRight="35.7dp"-->
+        <!--android:layout_marginTop="13.3dp"-->
+        <!--android:background="@drawable/threebtn">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="173.3dp"-->
+            <!--android:layout_marginTop="13dp"-->
+            <!--android:text="없음"-->
+            <!--android:textColor="@color/less_cloudy_blue"-->
+            <!--android:textSize="13sp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="99.7dp"-->
+            <!--android:layout_marginTop="13dp"-->
+            <!--android:text="보통"-->
+            <!--android:textColor="@color/color_main"-->
+            <!--android:textSize="13sp" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="27dp"-->
+            <!--android:layout_marginTop="13dp"-->
+            <!--android:text="심함"-->
+            <!--android:textColor="@color/less_cloudy_blue"-->
+            <!--android:textSize="13sp" />-->
+    <!--</RelativeLayout>-->
+
+
+    <!--<Button-->
+        <!--android:id="@+id/setting_opened_list_check_button"-->
+        <!--android:background="@drawable/check"-->
+        <!--android:layout_marginLeft="328.3dp"-->
+        <!--android:layout_marginTop="25.3dp"-->
+        <!--android:layout_width="19.7dp"-->
+        <!--android:layout_height="19.7dp" />-->
+
+    <!--<View-->
+        <!--android:background="@color/color_background"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:layout_alignParentBottom="true"/>-->
+
+    <!-- 4 가구 가전 옵션 -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_background">
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+                <TextView
+                    android:text="세탁기"
+                    android:layout_height="88.3dp"
+                    android:layout_width="88.3dp"
+                    android:paddingTop="37.3dp"
+                    android:paddingRight="24dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/less_cloudy_blue"/>
+                <TextView
+                    android:text="냉장고"
+                    android:layout_height="88.3dp"
+                    android:layout_width="88.3dp"
+                    android:layout_marginLeft="90.7dp"
+                    android:layout_marginTop="90.7dp"
+                    android:paddingTop="37.3dp"
+                    android:paddingRight="24dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/less_cloudy_blue"/>
+                <TextView
+                    android:text="세탁기"
+                    android:layout_height="88.3dp"
+                    android:layout_width="88.3dp"
+                    android:paddingTop="37.3dp"
+                    android:paddingRight="24dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/less_cloudy_blue"/>
+                <TextView
+                    android:text="세탁기"
+                    android:layout_height="88.3dp"
+                    android:layout_width="88.3dp"
+                    android:paddingTop="37.3dp"
+                    android:paddingRight="24dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/less_cloudy_blue"/>
+            </TableRow>
+    </TableLayout>
+</RelativeLayout>

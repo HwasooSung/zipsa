@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="336dp"
+    android:layout_height="66dp"
+    android:background="@drawable/round_corner"
+    >
+    
+    <TextView
+        android:id="@+id/address_textview_recycler_view_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13.7dp"
+        android:layout_centerVertical="true"
+        android:textSize="15sp"
+        android:textColor="@color/greyish_brown"
+        />
+    <!--android:text="마포구 상수동"-->
+
+    <TextView
+        android:id="@+id/room_kind_textview_recycler_view_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/address_textview_recycler_view_item"
+        android:layout_marginLeft="9dp"
+        android:layout_centerVertical="true"
+        android:textSize="11sp"
+        android:textColor="@color/warm_grey"
+        />
+    <!--android:text="원룸"-->
+
+    <TextView
+        android:id="@+id/price_of_room_textview_recycler_view_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:layout_centerVertical="true"
+        android:textSize="15sp"
+        android:textColor="@color/greyish_brown"
+        />
+    <!--android:text="1000/70"-->
+    
+    <ImageView
+        android:id="@+id/bookmark_imageview__recycler_view_item"
+        android:layout_width="12.3dp"
+        android:layout_height="19dp"
+        android:background="@drawable/bookmark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        android:visibility="invisible"/>
+    <!--android:visibility="visible"-->
+
+</RelativeLayout>

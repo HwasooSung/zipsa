@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.teamnexters.zipsa.AddOptionActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:background="@color/color_main">
+
+        <Button
+            android:id="@+id/add_option_activity_back_button"
+            android:layout_width="@dimen/back_button_width"
+            android:layout_height="@dimen/back_button_width"
+            android:layout_marginBottom="12.3dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="318dp"
+            android:layout_marginTop="12.7dp"
+            android:background="@drawable/back" />
+
+        <TextView
+            android:id="@+id/add_option_activity_bar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:text="@string/add_option"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/add_option_activity_store_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="321dp"
+            android:layout_marginRight="12.3dp"
+            android:layout_marginTop="14dp"
+            android:text="@string/complete"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@color/color_background"
+        android:paddingLeft="12.3dp"
+        android:paddingTop="34.3dp"
+        android:text="옵션 이름"
+        android:textColor="@color/text_black"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <EditText
+            android:id="@+id/add_option_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:paddingLeft="11.7dp"
+            android:hint="옵션 이름을 입력해주세요"
+            android:textColorHint="@color/cloudy_blue" />
+
+        <Button
+            android:id="@+id/add_option_activity_edit_text_x_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14.3dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/cancel" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@color/color_background" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="12.3dp"
+        android:paddingTop="18.7dp"
+        android:text="미리보기"
+        android:textColor="@color/text_black"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="3.4dp"
+        android:background="@drawable/line" />
+
+    <!-- 1 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12.3dp"
+            android:text="옵션 이름"
+            android:textColor="#99aeba"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="13.7dp"
+            android:layout_marginTop="43.3dp"
+            android:text="옵션 이름을 입력해주세요"
+            android:textColor="@color/cloudy_blue"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <!-- 2 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12.3dp"
+            android:text="옵션 이름"
+            android:textColor="#99aeba"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="223dp"
+            android:layout_height="43.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="125dp"
+            android:background="@drawable/twobtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="43.7dp"
+                android:text="있음"
+                android:textColor="@color/color_main"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="155.3dp"
+                android:text="없음"
+                android:textColor="#99aeba"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- 3 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <!--android:visibility="gone"-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12.3dp"
+            android:text="옵션 이름"
+            android:textColor="#99aeba"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="223dp"
+            android:layout_height="43.7dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="125dp"
+            android:background="@drawable/twobtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="43.7dp"
+                android:text="가능"
+                android:textColor="@color/color_main"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="141dp"
+                android:text="불가능"
+                android:textSize="13sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color_background" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="11.7dp"
+            android:text="가능 / 불가능"
+            android:textColor="@color/text_black" />
+
+        <Button
+            android:id="@+id/add_option_activity_possibility_button"
+            android:layout_width="19.7dp"
+            android:layout_height="19.7dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14.3dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/uncheck" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color_background" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="11.7dp"
+            android:text="있음 / 없음"
+            android:textColor="@color/text_black" />
+
+        <Button
+            android:id="@+id/add_option_activity_select_existence_button"
+            android:layout_width="19.7dp"
+            android:layout_height="19.7dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14.3dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/uncheck" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color_background" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="11.7dp"
+            android:text="직접 입력"
+            android:textColor="@color/text_black" />
+
+        <Button
+            android:id="@+id/add_option_activity_select_edit_button"
+            android:layout_width="19.7dp"
+            android:layout_height="19.7dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14.3dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/uncheck" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_background"></RelativeLayout>
+</LinearLayout>

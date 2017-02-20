@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 주소 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#dbd9d9"
+            android:alpha="33"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주소"
+            android:textSize="15sp"
+            android:textColor="#b8b8b8"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="28dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/color_background"
+            android:layout_marginTop="72dp"/>
+    </RelativeLayout>
+
+    <!-- 건물 층수 -->
+
+</RelativeLayout>
