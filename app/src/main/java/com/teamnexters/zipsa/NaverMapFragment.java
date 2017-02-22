@@ -3,6 +3,8 @@ package com.teamnexters.zipsa;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -27,6 +29,9 @@ import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
 
+import java.util.List;
+import java.util.Locale;
+
 /*
  * NAVER 지도 API
  * https://developers.naver.com/docs/map/android/
@@ -44,7 +49,6 @@ public class NaverMapFragment extends Fragment {
     private NMapView mapView;
 
     private NGeoPoint currentNGeoPoint;
-    private NMapOverlayItem nMapOverlayItem;
     private NMapViewerResourceProvider nMapViewerResourceProvider;
     private NMapOverlayManager nMapOverlayManager;
     private NMapPOIdata poiData;
@@ -54,6 +58,11 @@ public class NaverMapFragment extends Fragment {
     private LocationManager locationManager;
     private LocationListener locationListener;
     private Location currentLocation;
+
+    private Geocoder geocoder;
+    private String currentLocationAddress;
+    private String featuredAddress;
+
 
     //    private OnFragmentInteractionListener mListener;
 
@@ -136,6 +145,25 @@ public class NaverMapFragment extends Fragment {
 
         mMapContext.setupMapView(mapView);
 
+        // 주소 따오기
+        geocoder = new Geocoder(getContext(), Locale.KOREA);
+        List<Address> address;
+
+        try {
+            if(geocoder != null) {
+                address = geocoder.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(), 1);
+                if(address != null && address.size() != 0) {
+                    currentLocationAddress =  address.get(0).getAddressLine(0).toString().substring(address.get(0).getCountryName().toString().length()+1);
+//                    featuredAddress = address.get(0).getFeatureName();
+                    featuredAddress = address.get(0).getLocality();
+                }
+            }
+        }catch (Exception e) {
+            Toast.makeText(getContext(), "주소를 가져 올 수 없습니다.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+
+
         // 마커 찍는 부분
         currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
         nMapViewerResourceProvider = new NMapViewerResourceProvider(getContext());
@@ -144,37 +172,11 @@ public class NaverMapFragment extends Fragment {
         // set POI(Point of Interest) data
         poiData = new NMapPOIdata(1, nMapViewerResourceProvider);
         poiData.beginPOIdata(1);
-        poiData.addPOIitem(currentNGeoPoint.getLongitude(), currentNGeoPoint.getLatitude(), "is this title?", markerId, 0);
+        poiData.addPOIitem(currentNGeoPoint.getLongitude(), currentNGeoPoint.getLatitude(), currentLocationAddress + " " + featuredAddress, markerId, 0);
         poiData.endPOIdata();
 
         // create POI data overlay
         nMapPOIdataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData, null);
-
-        // set event listener to the overlay
-//        NMapPOIdataOverlay.OnStateChangeListener onPOIDataStateChangeListener = new NMapPOIdataOverlay.OnStateChangeListener() {
-//
-//            @Override
-//            public void onFocusChanged(NMapPOIdataOverlay nMapPOIdataOverlay, NMapPOIitem item) {
-//                if(item != null) {
-//                    Log.i("NMap Listener TAG", "onFocusChanged: " + item.toString());
-//                } else {
-//                    Log.i("Nmap Listener TAG", "onFocusChanged: ");
-//                }
-//            }
-//            @Override
-//            public  void onCalloutClick(NMapPOIdataOverlay poiDataOverlay, NMapPOIitem item) {
-//            }
-//        };
-//        nMapPOIdataOverlay.setOnStateChangeListener(onPOIDataStateChangeListener);
-
-        // register callout overlay listener to customize it.
-//        nMapOverlayManager.OnCalloutOverlayListener onCalloutOverlayListener = new NMapOverlayManager.OnCalloutOverlayListener() {
-//            @Override
-////          public NMapCalloutOverlay onCreateCalloutOverlay(NMapOverlay nMapOverlay, NMapOverlayItem nMapOverlayItem, Rect rect) {
-////              return null;
-////          }
-//        };
-//        nMapOverlayManager.setOnCalloutOverlayListener(onCalloutOverlayListener);
 
         nMapController = mapView.getMapController();
 
