@@ -1,4 +1,4 @@
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.teamnexters.zipsa.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

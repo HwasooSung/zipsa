@@ -1,18 +1,18 @@
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.activity;
 
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.teamnexters.zipsa.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.teamnexters.zipsa.CommonUtilForActivity.loadBackButton;
-import static com.teamnexters.zipsa.CommonUtilForActivity.loadImage;
+import static com.teamnexters.zipsa.util.CommonUtilForActivity.loadBackButton;
 
 public class SettingActivity extends AppCompatActivity {
 

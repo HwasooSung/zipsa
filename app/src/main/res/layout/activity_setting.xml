@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/color_background"
-    tools:context="com.teamnexters.zipsa.SettingActivity">
+    tools:context="com.teamnexters.zipsa.activity.SettingActivity">
 
     <include layout="@layout/top_bar" />
 

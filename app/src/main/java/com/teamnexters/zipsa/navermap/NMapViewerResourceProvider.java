@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.navermap;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -31,6 +31,7 @@ import android.widget.ListView;
 import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
+import com.teamnexters.zipsa.R;
 
 /**
  * Wrapper class to provider resources on map view.

@@ -1,4 +1,4 @@
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.activity;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.teamnexters.zipsa.R;
+import com.teamnexters.zipsa.fragment.NaverMapFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.teamnexters.zipsa.CommonUtilForActivity.loadBackButton;
-import static com.teamnexters.zipsa.CommonUtilForActivity.loadImage;
+import static com.teamnexters.zipsa.util.CommonUtilForActivity.loadBackButton;
 
 public class CurrentMapActivity extends AppCompatActivity {
 

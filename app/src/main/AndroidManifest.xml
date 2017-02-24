@@ -20,11 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SettingActivity"
+            android:name=".activity.SettingActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".AddOptionActivity" />
-        <activity android:name=".ModifyOptionActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".activity.AddOptionActivity" />
+        <activity android:name=".activity.ModifyOptionActivity" />
+        <activity android:name=".activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,10 +34,10 @@
             android:theme="@style/AppTheme"
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
-        <activity android:name=".CurrentMapActivity"></activity>
+        <activity android:name=".activity.CurrentMapActivity"></activity>
     </application>
 
 </manifest>

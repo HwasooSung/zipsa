@@ -1,7 +1,9 @@
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.teamnexters.zipsa.R;
 
 public class ModifyOptionActivity extends AppCompatActivity {
 

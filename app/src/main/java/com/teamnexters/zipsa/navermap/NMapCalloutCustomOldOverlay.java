@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.navermap;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -291,8 +291,8 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 			mWidthTitleTruncated = mapViewWidth;
 			float maxWidth = mWidthTitleTruncated - 2 * mMarginX - 2 * mPaddingX;
 			if (DEBUG) {
-				Log.i(LOG_TAG, "adjustTextBounds: maxWidth=" + maxWidth + ", mMarginX=" + mMarginX + ", mPaddingX="
-					+ mPaddingX);
+//				Log.i(LOG_TAG, "adjustTextBounds: maxWidth=" + maxWidth + ", mMarginX=" + mMarginX + ", mPaddingX="
+//					+ mPaddingX);
 			}
 
 			if (mDrawableRightButton != null) {
@@ -312,8 +312,8 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 			mTitleTruncated = title;
 
 			if (DEBUG) {
-				Log.i(LOG_TAG, "adjustTextBounds: mTitleTruncated=" + mTitleTruncated + ", length="
-					+ mTitleTruncated.length());
+//				Log.i(LOG_TAG, "adjustTextBounds: mTitleTruncated=" + mTitleTruncated + ", length="
+//					+ mTitleTruncated.length());
 			}
 		}
 
@@ -328,8 +328,8 @@ public class NMapCalloutCustomOldOverlay extends NMapCalloutOverlay {
 		}
 
 		if (DEBUG) {
-			Log.i(LOG_TAG, "adjustTextBounds: mTempRect.width=" + mTempRect.width() + ", mTempRect.height="
-				+ mTempRect.height());
+//			Log.i(LOG_TAG, "adjustTextBounds: mTempRect.width=" + mTempRect.width() + ", mTempRect.height="
+//				+ mTempRect.height());
 		}
 
 		//  Setup the callout with the right size & location

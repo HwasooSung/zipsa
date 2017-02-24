@@ -1,9 +1,10 @@
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.util;
 
 import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.teamnexters.zipsa.R;
 
 /**
  * Created by Hwasoo.Sung on 2017-02-14.

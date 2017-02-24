@@ -1,4 +1,4 @@
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.teamnexters.zipsa.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.teamnexters.zipsa.CommonUtilForActivity.loadImage;
+import static com.teamnexters.zipsa.util.CommonUtilForActivity.loadImage;
 
 public class MainActivity extends AppCompatActivity {
 

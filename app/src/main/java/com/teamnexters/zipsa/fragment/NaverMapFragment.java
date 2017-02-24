@@ -1,4 +1,4 @@
-package com.teamnexters.zipsa;
+package com.teamnexters.zipsa.fragment;
 
 import android.Manifest;
 import android.content.Context;
@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +19,15 @@ import android.widget.Toast;
 
 import com.nhn.android.maps.NMapContext;
 import com.nhn.android.maps.NMapController;
-import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.overlay.NMapPOIdata;
-import com.nhn.android.maps.overlay.NMapPOIitem;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
-import com.nhn.android.mapviewer.overlay.NMapResourceProvider;
+import com.teamnexters.zipsa.R;
+import com.teamnexters.zipsa.navermap.NMapPOIflagType;
+import com.teamnexters.zipsa.navermap.NMapViewerResourceProvider;
+import com.teamnexters.zipsa.util.ConstantsCommon;
 
 import java.util.List;
 import java.util.Locale;
@@ -134,6 +134,7 @@ public class NaverMapFragment extends Fragment {
 
         //
         mapView = (NMapView) getView().findViewById(R.id.map_view);
+        nMapController = mapView.getMapController();
 
         /* interacting with users */
         mapView.setClientId(ConstantsCommon.NAVER_CLIENT_ID);
@@ -177,8 +178,6 @@ public class NaverMapFragment extends Fragment {
 
         // create POI data overlay
         nMapPOIdataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData, null);
-
-        nMapController = mapView.getMapController();
 
         mapView.setScalingFactor(2.0f, false);
     }
