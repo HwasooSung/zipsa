@@ -18,6 +18,11 @@ glide, butterknife 설치
  - 더 하고 싶은 것
 마커 제대로 넣기
 
+2/24
+Package Manager는 manifest 파일을 조사하여...
+
+permissionsChecker => 권한은 어떻게 요구하는 게 좋을까ㅏ아아ㅏ아ㅏㅏ모르겟다
+gpstracker 만들다 말앗음 ㅇㅇㅇㅇ화이팅
 
 
 리사이클러 어댑터 만들어야함

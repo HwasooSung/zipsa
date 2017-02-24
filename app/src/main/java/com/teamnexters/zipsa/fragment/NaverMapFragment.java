@@ -44,6 +44,10 @@ public class NaverMapFragment extends Fragment {
     private String providerInfo;
     private boolean isLocationTrackingEnabled;
 
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    private Location currentLocation;
+
     private NMapContext mMapContext;
     private NMapController nMapController;
     private NMapView mapView;
@@ -53,11 +57,7 @@ public class NaverMapFragment extends Fragment {
     private NMapOverlayManager nMapOverlayManager;
     private NMapPOIdata poiData;
     private NMapPOIdataOverlay nMapPOIdataOverlay;
-    int markerId = NMapPOIflagType.PIN;
-
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private Location currentLocation;
+    private int markerId = NMapPOIflagType.PIN;
 
     private Geocoder geocoder;
     private String currentLocationAddress;
@@ -84,6 +84,21 @@ public class NaverMapFragment extends Fragment {
 
     // 현재 위치 찾고 네이버 지도 현재 위치로 포커스
     private void initMapView() {
+        //
+        mapView = (NMapView) getView().findViewById(R.id.map_view);
+        /* interacting with users */
+        mapView.setClientId(ConstantsCommon.NAVER_CLIENT_ID);
+        mapView.setClickable(true);
+        mapView.setEnabled(true);
+        mapView.setFocusable(true);
+        mapView.setFocusableInTouchMode(true);
+        mapView.requestFocus();
+
+        mMapContext.setupMapView(mapView); // 얘가 객체 만들어주나봄.. 얘 없으니 계속 null 익셉션 뜸
+        nMapController = mapView.getMapController();
+
+
+        /////////////////////////////////////////////////////////////////
         // 퍼미션 등록
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -93,6 +108,7 @@ public class NaverMapFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE}, ConstantsCommon.TAG_CODE_PERMISSION_LOCATION);
         } else {}
 
+        /////////////////////////////////////////////////////////////////
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -129,22 +145,12 @@ public class NaverMapFragment extends Fragment {
             locationManager.requestLocationUpdates(providerInfo, ConstantsCommon.MIN_TIME_INTERVAL_FOR_UPDATE, ConstantsCommon.MIN_DISTANCE_CHANGE_FOR_UPDATE, locationListener);
             if(locationManager != null) {
                 currentLocation = locationManager.getLastKnownLocation(providerInfo);
+                currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
+                nMapController.animateTo(currentNGeoPoint);
             }
         }
+        /////////////////////////////////////////////////////////////////
 
-        //
-        mapView = (NMapView) getView().findViewById(R.id.map_view);
-        nMapController = mapView.getMapController();
-
-        /* interacting with users */
-        mapView.setClientId(ConstantsCommon.NAVER_CLIENT_ID);
-        mapView.setClickable(true);
-        mapView.setEnabled(true);
-        mapView.setFocusable(true);
-        mapView.setFocusableInTouchMode(true);
-        mapView.requestFocus();
-
-        mMapContext.setupMapView(mapView);
 
         // 주소 따오기
         geocoder = new Geocoder(getContext(), Locale.KOREA);
@@ -156,7 +162,7 @@ public class NaverMapFragment extends Fragment {
                 if(address != null && address.size() != 0) {
                     currentLocationAddress =  address.get(0).getAddressLine(0).toString().substring(address.get(0).getCountryName().toString().length()+1);
 //                    featuredAddress = address.get(0).getFeatureName();
-                    featuredAddress = address.get(0).getLocality();
+//                    featuredAddress = address.get(0).getLocality();
                 }
             }
         }catch (Exception e) {
