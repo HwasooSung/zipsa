@@ -7,10 +7,12 @@ package com.teamnexters.zipsa.util;
 public class ConstantsCommon {
     public static String NAVER_CLIENT_ID = "3iUfYSGYlzT9nevsm6cV";
 
-    public static int TAG_CODE_PERMISSION_LOCATION = 1;
+    public static int PERMISSION_REQUEST_FOR_LOCATION = 1;
 
     // millisecond
     public static long MIN_TIME_INTERVAL_FOR_UPDATE = 1000*60*1;
     // meter
     public static float MIN_DISTANCE_CHANGE_FOR_UPDATE = 10;
+
+    public static String TAG = "ZIPSA_TAG";
 }

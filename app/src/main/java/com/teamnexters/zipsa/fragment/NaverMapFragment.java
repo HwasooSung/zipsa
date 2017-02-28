@@ -2,16 +2,19 @@ package com.teamnexters.zipsa.fragment;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +28,11 @@ import com.nhn.android.maps.overlay.NMapPOIdata;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 import com.teamnexters.zipsa.R;
+import com.teamnexters.zipsa.activity.CurrentMapActivity;
 import com.teamnexters.zipsa.navermap.NMapPOIflagType;
 import com.teamnexters.zipsa.navermap.NMapViewerResourceProvider;
 import com.teamnexters.zipsa.util.ConstantsCommon;
+import com.teamnexters.zipsa.util.GPSTracker;
 
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +44,7 @@ import java.util.Locale;
 
 public class NaverMapFragment extends Fragment {
 
+    /*
     private boolean isNetworkEnabled;
     private boolean isGPSEnabled;
     private String providerInfo;
@@ -46,6 +52,10 @@ public class NaverMapFragment extends Fragment {
 
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private Location currentLocation;
+    */
+
+    private GPSTracker gpsTracker;
     private Location currentLocation;
 
     private NMapContext mMapContext;
@@ -63,6 +73,7 @@ public class NaverMapFragment extends Fragment {
     private String currentLocationAddress;
     private String featuredAddress;
 
+    private Runnable getCurrentLocationRunnable;
 
     //    private OnFragmentInteractionListener mListener;
 
@@ -75,6 +86,8 @@ public class NaverMapFragment extends Fragment {
         super.onCreate(saveInstanceState);
         mMapContext = new NMapContext(super.getActivity());
         mMapContext.onCreate();
+        gpsTracker = new GPSTracker(getContext());
+//        getContext().startService(new Intent(getContext(), GPSTracker.class));
     }
 
     @Override
@@ -82,11 +95,18 @@ public class NaverMapFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_naver_map, container, false);
     }
 
+    @Override
+    public void onActivityCreated(Bundle saveInstanceState) {
+        super.onActivityCreated(saveInstanceState);
+        initMapView();
+    }
+
     // 현재 위치 찾고 네이버 지도 현재 위치로 포커스
     private void initMapView() {
-        //
+        // xml view 갖다 붙임
         mapView = (NMapView) getView().findViewById(R.id.map_view);
-        /* interacting with users */
+
+        // interacting with users
         mapView.setClientId(ConstantsCommon.NAVER_CLIENT_ID);
         mapView.setClickable(true);
         mapView.setEnabled(true);
@@ -98,17 +118,26 @@ public class NaverMapFragment extends Fragment {
         nMapController = mapView.getMapController();
 
 
+        // 현재 위치 불러오기
+        currentLocation = gpsTracker.getCurrentLocation();
+        currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
+
+        // 그 위치로 이동
+        nMapController.animateTo(currentNGeoPoint);
+
         /////////////////////////////////////////////////////////////////
         // 퍼미션 등록
+        /*
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE}, ConstantsCommon.TAG_CODE_PERMISSION_LOCATION);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE}, ConstantsCommon.PERMISSION_REQUEST_FOR_LOCATION);
         } else {}
-
+        */
         /////////////////////////////////////////////////////////////////
+        /*
         locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -146,11 +175,12 @@ public class NaverMapFragment extends Fragment {
             if(locationManager != null) {
                 currentLocation = locationManager.getLastKnownLocation(providerInfo);
                 currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
+                Log.d(ConstantsCommon.TAG, "location is " + currentLocation.getLongitude() + ", " + currentLocation.getLatitude());
                 nMapController.animateTo(currentNGeoPoint);
             }
         }
+        */
         /////////////////////////////////////////////////////////////////
-
 
         // 주소 따오기
         geocoder = new Geocoder(getContext(), Locale.KOREA);
@@ -161,8 +191,6 @@ public class NaverMapFragment extends Fragment {
                 address = geocoder.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(), 1);
                 if(address != null && address.size() != 0) {
                     currentLocationAddress =  address.get(0).getAddressLine(0).toString().substring(address.get(0).getCountryName().toString().length()+1);
-//                    featuredAddress = address.get(0).getFeatureName();
-//                    featuredAddress = address.get(0).getLocality();
                 }
             }
         }catch (Exception e) {
@@ -179,19 +207,13 @@ public class NaverMapFragment extends Fragment {
         // set POI(Point of Interest) data
         poiData = new NMapPOIdata(1, nMapViewerResourceProvider);
         poiData.beginPOIdata(1);
-        poiData.addPOIitem(currentNGeoPoint.getLongitude(), currentNGeoPoint.getLatitude(), currentLocationAddress + " " + featuredAddress, markerId, 0);
+        poiData.addPOIitem(currentNGeoPoint.getLongitude(), currentNGeoPoint.getLatitude(), currentLocationAddress, markerId, 0);
         poiData.endPOIdata();
 
         // create POI data overlay
         nMapPOIdataOverlay = nMapOverlayManager.createPOIdataOverlay(poiData, null);
 
         mapView.setScalingFactor(2.0f, false);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle saveInstanceState) {
-        super.onActivityCreated(saveInstanceState);
-        initMapView();
     }
 
     @Override
@@ -230,7 +252,7 @@ public class NaverMapFragment extends Fragment {
         ContextCompat.checkSelfPermission(getContext(), Manifest.permission.INTERNET);
         ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_WIFI_STATE);
 
-        locationManager.removeUpdates(locationListener);
+        gpsTracker.removeGPSTracker();
         mMapContext.onDestroy();
         super.onDestroy();
     }
