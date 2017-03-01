@@ -1,5 +1,6 @@
 package com.teamnexters.zipsa.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -16,15 +17,18 @@ import butterknife.OnClick;
 
 import static com.teamnexters.zipsa.util.CommonUtilForActivity.loadBackButton;
 
-public class CurrentMapActivity extends AppCompatActivity {
+public class CurrentMapActivity extends AppCompatActivity implements NaverMapFragment.OnAddressDataLoadedEventListener{
 
     // Naver 지도 프래그먼트 관련 변수
     NaverMapFragment naverMapFragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
+    String currentPointAddress;
+
     @BindView(R.id.top_bar_left_image) ImageView backButton;
     @BindView(R.id.top_bar_text_title) TextView title;
+    @BindView(R.id.current_map_activity_address_text_view) TextView addressTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,10 @@ public class CurrentMapActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void setAddressData(String address) {
+        this.currentPointAddress = address;
+    }
+
     void viewSetting() {
         ButterKnife.bind(this);
         loadBackButton(this, backButton);
@@ -57,4 +65,8 @@ public class CurrentMapActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    public void onAddressDataLoaded(String address) {
+        addressTextView.setText(address);
+    }
 }

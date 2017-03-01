@@ -20,7 +20,7 @@ import android.util.Log;
  * Created by Hwasoo.Sung on 2017-02-24.
  */
 
-public class GPSTracker extends Service implements LocationListener {
+public class GPSTracker implements LocationListener {
 
     private Context context;
 
@@ -52,10 +52,12 @@ public class GPSTracker extends Service implements LocationListener {
         if (isGPSEnabled) {
             providerInfo = LocationManager.GPS_PROVIDER;
             isLocationTrackingEnabled = true;
-        } else if (isNetworkEnabled) {
+        }
+        if (isNetworkEnabled) {
             providerInfo = LocationManager.NETWORK_PROVIDER;
             isLocationTrackingEnabled = true;
-        } else {
+        }
+        if(!isGPSEnabled && !isNetworkEnabled) {
             isLocationTrackingEnabled = false;
         }
 
@@ -79,7 +81,6 @@ public class GPSTracker extends Service implements LocationListener {
             locationManager.requestLocationUpdates(providerInfo, ConstantsCommon.MIN_TIME_INTERVAL_FOR_UPDATE, ConstantsCommon.MIN_DISTANCE_CHANGE_FOR_UPDATE, this);
             if (locationManager != null) {
                 currentLocation = locationManager.getLastKnownLocation(providerInfo);
-//                Log.d(ConstantsCommon.TAG, "Check " + "currentLocation is " + currentLocation.toString());
             }
         }
     }
@@ -138,9 +139,4 @@ public class GPSTracker extends Service implements LocationListener {
     public void onProviderDisabled(String provider) {
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 }

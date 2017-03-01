@@ -1,25 +1,17 @@
 package com.teamnexters.zipsa.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.nhn.android.maps.NMapContext;
 import com.nhn.android.maps.NMapController;
 import com.nhn.android.maps.NMapView;
@@ -28,14 +20,11 @@ import com.nhn.android.maps.overlay.NMapPOIdata;
 import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
 import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
 import com.teamnexters.zipsa.R;
-import com.teamnexters.zipsa.activity.CurrentMapActivity;
 import com.teamnexters.zipsa.navermap.NMapPOIflagType;
 import com.teamnexters.zipsa.navermap.NMapViewerResourceProvider;
+import com.teamnexters.zipsa.util.AddressGiver;
 import com.teamnexters.zipsa.util.ConstantsCommon;
 import com.teamnexters.zipsa.util.GPSTracker;
-
-import java.util.List;
-import java.util.Locale;
 
 /*
  * NAVER 지도 API
@@ -43,17 +32,6 @@ import java.util.Locale;
  */
 
 public class NaverMapFragment extends Fragment {
-
-    /*
-    private boolean isNetworkEnabled;
-    private boolean isGPSEnabled;
-    private String providerInfo;
-    private boolean isLocationTrackingEnabled;
-
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private Location currentLocation;
-    */
 
     private GPSTracker gpsTracker;
     private Location currentLocation;
@@ -69,16 +47,28 @@ public class NaverMapFragment extends Fragment {
     private NMapPOIdataOverlay nMapPOIdataOverlay;
     private int markerId = NMapPOIflagType.PIN;
 
-    private Geocoder geocoder;
+    private AddressGiver addressGiver;
     private String currentLocationAddress;
-    private String featuredAddress;
 
-    private Runnable getCurrentLocationRunnable;
+    private OnAddressDataLoadedEventListener onAddressDataLoadedEventListener;
 
-    //    private OnFragmentInteractionListener mListener;
+    public interface OnAddressDataLoadedEventListener {
+        public void onAddressDataLoaded(String address);
+    }
 
     public NaverMapFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            // 얘가 Key임!!!!!!!!!!
+            onAddressDataLoadedEventListener = (OnAddressDataLoadedEventListener) context;
+        } catch (Exception e){
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -87,7 +77,6 @@ public class NaverMapFragment extends Fragment {
         mMapContext = new NMapContext(super.getActivity());
         mMapContext.onCreate();
         gpsTracker = new GPSTracker(getContext());
-//        getContext().startService(new Intent(getContext(), GPSTracker.class));
     }
 
     @Override
@@ -117,87 +106,19 @@ public class NaverMapFragment extends Fragment {
         mMapContext.setupMapView(mapView); // 얘가 객체 만들어주나봄.. 얘 없으니 계속 null 익셉션 뜸
         nMapController = mapView.getMapController();
 
-
         // 현재 위치 불러오기
         currentLocation = gpsTracker.getCurrentLocation();
         currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
 
-        // 그 위치로 이동
+        // 그 위치로 지도 이동
         nMapController.animateTo(currentNGeoPoint);
 
-        /////////////////////////////////////////////////////////////////
-        // 퍼미션 등록
-        /*
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE}, ConstantsCommon.PERMISSION_REQUEST_FOR_LOCATION);
-        } else {}
-        */
-        /////////////////////////////////////////////////////////////////
-        /*
-        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                currentLocation = location;
-                currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
-                nMapController.animateTo(currentNGeoPoint);
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-            @Override
-            public void onProviderEnabled(String provider) {}
-            @Override
-            public void onProviderDisabled(String provider) {}
-        };
-
-        isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
-        if(isGPSEnabled) {
-            isLocationTrackingEnabled = true;
-            providerInfo = LocationManager.GPS_PROVIDER;
-        }
-        else if(isNetworkEnabled) {
-            isLocationTrackingEnabled = true;
-            providerInfo = LocationManager.NETWORK_PROVIDER;
-        }
-        else {
-            isLocationTrackingEnabled = false;
-        }
-
-        if(!providerInfo.isEmpty()) {
-            locationManager.requestLocationUpdates(providerInfo, ConstantsCommon.MIN_TIME_INTERVAL_FOR_UPDATE, ConstantsCommon.MIN_DISTANCE_CHANGE_FOR_UPDATE, locationListener);
-            if(locationManager != null) {
-                currentLocation = locationManager.getLastKnownLocation(providerInfo);
-                currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
-                Log.d(ConstantsCommon.TAG, "location is " + currentLocation.getLongitude() + ", " + currentLocation.getLatitude());
-                nMapController.animateTo(currentNGeoPoint);
-            }
-        }
-        */
-        /////////////////////////////////////////////////////////////////
-
         // 주소 따오기
-        geocoder = new Geocoder(getContext(), Locale.KOREA);
-        List<Address> address;
+        addressGiver = new AddressGiver(getContext(), currentLocation);
+        currentLocationAddress = addressGiver.getAddress();
 
-        try {
-            if(geocoder != null) {
-                address = geocoder.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(), 1);
-                if(address != null && address.size() != 0) {
-                    currentLocationAddress =  address.get(0).getAddressLine(0).toString().substring(address.get(0).getCountryName().toString().length()+1);
-                }
-            }
-        }catch (Exception e) {
-            Toast.makeText(getContext(), "주소를 가져 올 수 없습니다.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-
+        // activity로 주소 data 보내기
+        onAddressDataLoadedEventListener.onAddressDataLoaded(currentLocationAddress);
 
         // 마커 찍는 부분
         currentNGeoPoint = new NGeoPoint(currentLocation.getLongitude(), currentLocation.getLatitude());
@@ -207,6 +128,7 @@ public class NaverMapFragment extends Fragment {
         // set POI(Point of Interest) data
         poiData = new NMapPOIdata(1, nMapViewerResourceProvider);
         poiData.beginPOIdata(1);
+        Log.d(ConstantsCommon.TAG, "usage of currentLocationAddress");
         poiData.addPOIitem(currentNGeoPoint.getLongitude(), currentNGeoPoint.getLatitude(), currentLocationAddress, markerId, 0);
         poiData.endPOIdata();
 
@@ -248,7 +170,7 @@ public class NaverMapFragment extends Fragment {
     @Override
     public void onDestroy() {
         ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-        ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ;
+        ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION);
         ContextCompat.checkSelfPermission(getContext(), Manifest.permission.INTERNET);
         ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_WIFI_STATE);
 
@@ -256,49 +178,7 @@ public class NaverMapFragment extends Fragment {
         mMapContext.onDestroy();
         super.onDestroy();
     }
-//    private void initLocation() {
-//        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//                && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-//                && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED
-//                && ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
-//
-//            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET, Manifest.permission.ACCESS_WIFI_STATE}, ConstantsCommon.TAG_CODE_PERMISSION_LOCATION);
-//
-//        } else {
-//        }
-//
-//        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-//        locationListener = new LocationListener() {
-//
-//            @Override
-//            public void onLocationChanged(Location location) {
-//                Log.d("HI", location.getLatitude() + ", " + location.getLongitude());
-//                currentPoint = location;
-//            }
-//
-//            @Override
-//            public void onStatusChanged(String provider, int status, Bundle extras) {
-//            }
-//
-//            @Override
-//            public void onProviderEnabled(String provider) {
-//            }
-//
-//            @Override
-//            public void onProviderDisabled(String provider) {
-//            }
-//        };
-//
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, ConstantsCommon.MIN_TIME_INTERVAL_FOR_UPDATE, ConstantsCommon.MIN_DISTANCE_CHANGE_FOR_UPDATE, locationListener);
-//        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, ConstantsCommon.MIN_TIME_INTERVAL_FOR_UPDATE, ConstantsCommon.MIN_DISTANCE_CHANGE_FOR_UPDATE, locationListener);
-//    }
 
-//
-//
-//
-//
-//
-//
 //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
@@ -306,16 +186,7 @@ public class NaverMapFragment extends Fragment {
 //        }
 //    }
 //
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
+
 //
 //    @Override
 //    public void onDetach() {
