@@ -15,7 +15,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="55dp"
         android:background="@color/white"
-        android:hint="검색"
+        android:hint="주소로 검색"
         android:paddingLeft="11.7dp"
         android:textColor="@color/greyish_brown"
         android:textColorHint="@color/cloudy_blue" />
@@ -30,8 +30,7 @@
         android:paddingLeft="11.7dp"
         android:text="현재 위치의 주소는"
         android:textColor="@color/warm_grey"
-        android:textSize="15sp"
-        />
+        android:textSize="15sp" />
     <TextView
         android:id="@+id/current_map_activity_address_text_view"
         android:layout_width="match_parent"
@@ -41,21 +40,19 @@
         android:paddingLeft="11.7dp"
         android:textColor="@color/greyish_brown"
         android:textSize="20sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
     <TextView
         android:id="@+id/current_map_activity_ok_button"
         android:layout_width="168dp"
         android:layout_height="44dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:background="@drawable/round_corner"
         android:gravity="center"
         android:text="확인"
         android:textColor="@color/greyish_brown"
         android:textSize="15sp" />
-
     <TextView
         android:id="@+id/current_map_activity_skip_button"
         android:layout_width="168dp"
@@ -63,13 +60,12 @@
         android:layout_toRightOf="@id/current_map_activity_ok_button"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="5dp"
-        android:layout_marginBottom="29dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/round_corner_red"
         android:gravity="center"
         android:text="건너뛰기"
         android:textColor="@color/white"
         android:textSize="15sp" />
-
 
     <RelativeLayout
         android:id="@+id/current_map_pop_up"
@@ -80,7 +76,6 @@
         android:layout_marginBottom="83dp"
         android:background="@drawable/round_corner"
         android:visibility="gone">
-
         <TextView
             android:id="@+id/current_map_warning_text_when_back_pressed"
             android:layout_width="match_parent"
@@ -91,14 +86,12 @@
             android:text="작성 중이던 모든 내용이 사라집니다.\n정말 뒤로 가시겠습니까?"
             android:textColor="@color/warm_grey"
             android:textSize="12sp" />
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="51dp"
             android:src="@drawable/line" />
-
         <TextView
             android:id="@+id/current_map_go_back"
             android:layout_width="match_parent"
@@ -110,7 +103,6 @@
             android:text="뒤로가기"
             android:textColor="@color/pastel_red"
             android:textSize="15sp" />
-
     </RelativeLayout>
 
     <TextView
@@ -126,11 +118,10 @@
         android:textColor="@color/greyish_brown"
         android:textSize="15sp"
         android:visibility="gone" />
-
     <LinearLayout
         android:id="@+id/naver_map_fragment_here"
         android:layout_width="match_parent"
-        android:layout_height="317.3dp"
+        android:layout_height="360dp"
         android:orientation="vertical"
         android:background="@color/colorPrimaryDark"
         android:layout_below="@+id/current_map_search_edit_text"
