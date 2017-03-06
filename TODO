@@ -1,3 +1,7 @@
+﻿TODO ON TOMORROW
+주소로 검색하는거 해야함
+
+
 did
 2/14
 glide, butterknife 설치
@@ -24,12 +28,17 @@ Package Manager는 manifest 파일을 조사하여...
 permissionsChecker => 권한은 어떻게 요구하는 게 좋을까ㅏ아아ㅏ아ㅏㅏ모르겟다
 gpstracker 만들다 말앗음 ㅇㅇㅇㅇ화이팅
 
+3/1
+naver api로 좌표 불러오는 거 해봄
+header()
+HttpRequest from kevin~ 이용해봄
+geo coder 분리,
+특정 장소 이름 얻어오기 => 크롤링으로 해야함
 
 
-naver rest api 주소 얻는 법을 바꿈ㅇㅇ
-httprequest 이용해서 만드는 거 알아보기
-특정 장소 이름 얻어오기
-geo coder 분리, place name 알아오는 거 분리
+
+
+
 
 리사이클러 어댑터 만들어야함
 realm 공부해야함
