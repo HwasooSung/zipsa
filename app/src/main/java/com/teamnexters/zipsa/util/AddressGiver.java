@@ -38,7 +38,7 @@ public class AddressGiver {
                 }
             }
         } catch (Exception e) {
-            Toast.makeText(context, "주소를 가져 올 수 없습니다.", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "주소를 가져올 수 없어요. 바깥에서 시도해주세요.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }

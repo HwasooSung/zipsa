@@ -15,10 +15,15 @@
         android:layout_height="50dp"
         android:layout_marginTop="55dp"
         android:background="@color/white"
-        android:hint="주소로 검색"
         android:paddingLeft="11.7dp"
         android:textColor="@color/greyish_brown"
         android:textColorHint="@color/cloudy_blue" />
+    <ImageView
+        android:id="@+id/current_map_activity_search_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="55dp"/>
 
     <!-- Naver Map -->
 
@@ -50,7 +55,7 @@
         android:layout_marginLeft="10dp"
         android:background="@drawable/round_corner"
         android:gravity="center"
-        android:text="확인"
+        android:text="여기가 맞아요"
         android:textColor="@color/greyish_brown"
         android:textSize="15sp" />
     <TextView

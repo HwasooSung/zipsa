@@ -1,8 +1,14 @@
 ﻿TODO ON TOMORROW
-주소로 검색하는거 해야함
+response body 확인해볼 것
+좌표 받아서 지도에 찍기
+currentMapActivity 완성 좀 하자
 
 
-did
+DID
+3/7
+프래그먼트랑 액티비티 사이 통신하는 인터페이스 뺐음 - 네이밍이 마음에 안들음
+주소 요청 보내기 성공함
+
 2/14
 glide, butterknife 설치
 
