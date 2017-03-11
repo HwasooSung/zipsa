@@ -1,6 +1,7 @@
 ﻿TODO ON TOMORROW
 json 객체 item 2개 이상인 거 찾아보기
 json 객체 파싱하기
+LocationInfo 원하는 정보로 바꾸기
 
 좌표 받아서 지도에 찍기
 currentMapActivity 완성 좀 하자
