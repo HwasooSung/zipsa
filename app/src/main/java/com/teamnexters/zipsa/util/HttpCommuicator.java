@@ -12,9 +12,7 @@ import org.json.JSONObject;
 
 public class HttpCommuicator {
 
-    public HttpCommuicator() {
-
-    }
+    public HttpCommuicator() {}
 
     public void sendRequestTo(String url) {
         final String naverUrl = url;
@@ -27,9 +25,9 @@ public class HttpCommuicator {
                 boolean isSuccess = httpRequest.ok();
                 int statusCode = httpRequest.code();
 
-                Log.d(ConstantsCommon.TAG, "isSuccess: " + isSuccess + "\nstatusCode is " + statusCode);
-                String response = httpRequest.body();
-                System.out.println("response is " + response);
+//                Log.d(ConstantsCommon.TAG, "isSuccess: " + isSuccess + "\nstatusCode is " + statusCode);
+                String response = httpRequest.body().toString();
+//                Log.d(ConstantsCommon.TAG, "response is " + response);
             }
         }).start();
     }

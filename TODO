@@ -1,13 +1,19 @@
 ﻿TODO ON TOMORROW
-response body 확인해볼 것
+json 객체 item 2개 이상인 거 찾아보기
+json 객체 파싱하기
+
 좌표 받아서 지도에 찍기
 currentMapActivity 완성 좀 하자
 
 
 DID
+3/12
+response body 확인해볼 것 - 확인했음
+
 3/7
 프래그먼트랑 액티비티 사이 통신하는 인터페이스 뺐음 - 네이밍이 마음에 안들음
 주소 요청 보내기 성공함
+http 통신하는 모듈 하나 뺌
 
 2/14
 glide, butterknife 설치
