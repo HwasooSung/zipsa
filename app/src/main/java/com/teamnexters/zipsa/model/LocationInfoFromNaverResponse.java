@@ -6,15 +6,15 @@ import android.location.Location;
  * Created by Hwasoo.Sung on 2017-03-12.
  */
 
-public class LocationInfo {
+public class LocationInfoFromNaverResponse {
     private String address;
     private Location location;
 
-    public LocationInfo() {
+    public LocationInfoFromNaverResponse() {
 
     }
 
-    public LocationInfo(String address, Location location) {
+    public LocationInfoFromNaverResponse(String address, Location location) {
         this.address = address;
         this.location = location;
     }
