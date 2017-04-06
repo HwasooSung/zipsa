@@ -7,17 +7,15 @@ import android.location.Location;
  */
 
 public class LocationInfoFromNaverResponse {
-    private String address;
+
+    private Address address;
     private Location location;
 
     public LocationInfoFromNaverResponse() {
 
     }
 
-    public LocationInfoFromNaverResponse(String address, Location location) {
-        this.address = address;
-        this.location = location;
-    }
+
 
 
 }
